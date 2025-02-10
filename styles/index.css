@@ -1,0 +1,50 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  --blue: #233c67;
+}
+
+body {
+  background-color: var(--blue);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 60px;
+}
+
+header {
+  height: 10vh;
+}
+
+main {
+  display: flex;
+  gap: 100px;
+  justify-content: center;
+}
+
+.page-img {
+  width: 200px;
+}
+
+.h1-p {
+  color: white;
+}
+
+.h1-p > h1 {
+  font-size: 56px;
+  margin-bottom: 0;
+}
+
+.h1-p > p {
+  font-size: 1.3rem;
+  margin-top: 5px;
+}
+
+.create-cv-btn {
+  padding: 0.5em 1em;
+  font-size: 1em;
+  font-weight: bold;
+  color: var(--blue);
+  cursor: pointer;
+}
