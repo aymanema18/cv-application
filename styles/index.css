@@ -6,11 +6,18 @@
 }
 
 body {
+  height: 100vh;
+  margin: 0;
+}
+
+#root {
   background-color: var(--blue);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  padding: 0;
   gap: 60px;
+  height: 100%;
+  text-align: start;
 }
 
 header {
