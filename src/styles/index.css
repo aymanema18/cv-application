@@ -1,0 +1,123 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  --blue: #233c67;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+}
+
+#root {
+  background-color: var(--blue);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  gap: 60px;
+  height: 100%;
+  text-align: start;
+}
+
+header {
+  height: 10vh;
+}
+
+main {
+  display: flex;
+  gap: 100px;
+  justify-content: center;
+}
+
+.page-img {
+  width: 200px;
+}
+
+.h1-p-btn {
+  text-align: start;
+}
+
+.h1-p {
+  color: white;
+}
+
+.h1-p > h1 {
+  font-size: 56px;
+  margin-bottom: 0;
+}
+
+.h1-p > p {
+  font-size: 1.3rem;
+  margin-top: 5px;
+}
+
+.create-cv-btn {
+  padding: 0.5em 1em;
+  font-size: 1em;
+  font-weight: bold;
+  color: var(--blue);
+  cursor: pointer;
+}
+
+.dialog-div {
+  height: 70vh;
+  width: 80vw;
+  display: grid;
+  grid-template-rows: 1fr 40px;
+}
+
+form {
+  align-self: flex-start;
+}
+
+.form-inputs-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: max-content;
+
+  gap: 0 40px;
+}
+
+.form-container {
+  width: 80%;
+  padding: 0 45px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  padding: 30px 0;
+  justify-self: center;
+  font-weight: bold;
+}
+
+.form-heading {
+  align-self: self-start;
+}
+
+input {
+  height: 2em;
+  width: 160px;
+  border: 1.5px solid black;
+}
+
+.btns-div {
+  display: grid;
+  grid-auto-columns: 50% 50%;
+}
+
+.next-btn {
+  grid-column: 2;
+  justify-self: end;
+  align-self: center;
+  margin-right: 50px;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
