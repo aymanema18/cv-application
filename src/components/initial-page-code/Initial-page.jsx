@@ -62,6 +62,8 @@ export default function InitialPage() {
 
   function handleCreateBtnClick() {
     const dialog = document.querySelector("dialog");
+    const div = document.querySelector(".form-inputs-container > div");
+    div.classList = "prf-form-container";
 
     dialog.showModal();
   }
@@ -75,6 +77,19 @@ export default function InitialPage() {
       setStep(0);
       dialog.close();
     }
+  }
+
+  function handleBackBtnClick() {
+    setStep(step - 1);
+    if (step === 1) {
+      const div = document.querySelector(".form-inputs-container > div");
+      div.classList = "prf-form-container";
+    }
+  }
+
+  function handleAddBtnClick(e) {
+    e.preventDefault();
+    return <Input labelText="dsf" type="text" key="dfasafasfsaf" />;
   }
   // console.log("inside InitialPage");
 
@@ -103,59 +118,87 @@ export default function InitialPage() {
               <h1 className="form-heading">{inputsInfo[step]["heading"]}</h1>
               <form action="">
                 <div className="form-inputs-container">
-                  {keys.map((key) => {
-                    if (
-                      typeof inputsInfo[step][key] === "object" &&
-                      Array.isArray(inputsInfo[step][key]) === false
-                    ) {
-                      return (
-                        <>
-                          <div
-                            className="field form-inputs-container"
-                            key={inputsInfo[step][key]["id"]}
-                          >
-                            {Object.keys(inputsInfo[step][key]).map((item) => {
-                              if (
-                                typeof inputsInfo[step][key][item] ===
-                                  "object" &&
-                                Array.isArray(inputsInfo[step][key][item]) ===
-                                  true
-                              ) {
-                                return (
-                                  <Input
-                                    labelText={inputsInfo[step][key][item][0]}
-                                    type={inputsInfo[step][key][item][1]}
-                                    key={inputsInfo[step][key][item][2]}
-                                  />
-                                );
-                              }
-                            })}
-                          </div>
-                          <button className="add-field-btn">Add</button>
-                        </>
+                  <div>
+                    {keys.map((key) => {
+                      const div = document.querySelector(
+                        ".form-inputs-container > div"
                       );
-                    }
+                      if (
+                        typeof inputsInfo[step][key] === "object" &&
+                        Array.isArray(inputsInfo[step][key]) === false
+                      ) {
+                        div.classList = "";
+                        return (
+                          <>
+                            <div
+                              className="field form-inputs-container-lvl-two"
+                              key={inputsInfo[step][key]["id"]}
+                            >
+                              {Object.keys(inputsInfo[step][key]).map(
+                                (item) => {
+                                  if (
+                                    typeof inputsInfo[step][key][item] ===
+                                      "object" &&
+                                    Array.isArray(
+                                      inputsInfo[step][key][item]
+                                    ) === true
+                                  ) {
+                                    return (
+                                      <Input
+                                        labelText={
+                                          inputsInfo[step][key][item][0]
+                                        }
+                                        type={inputsInfo[step][key][item][1]}
+                                        key={inputsInfo[step][key][item][2]}
+                                      />
+                                    );
+                                  }
+                                }
+                              )}
+                            </div>
+                            <button
+                              className="add-field-btn"
+                              onClick={(e) => {
+                                handleAddBtnClick(e);
+                              }}
+                            >
+                              Add
+                            </button>
+                          </>
+                        );
+                      }
 
-                    if (
-                      typeof inputsInfo[step][key] === "object" &&
-                      Array.isArray(inputsInfo[step][key]) === true
-                    ) {
-                      return (
-                        <Input
-                          labelText={inputsInfo[step][key][0]}
-                          type={inputsInfo[step][key][1]}
-                          key={inputsInfo[step][key][2]}
-                        />
-                      );
-                    }
-                  })}
+                      if (
+                        typeof inputsInfo[step][key] === "object" &&
+                        Array.isArray(inputsInfo[step][key]) === true
+                      ) {
+                        return (
+                          <Input
+                            labelText={inputsInfo[step][key][0]}
+                            type={inputsInfo[step][key][1]}
+                            key={inputsInfo[step][key][2]}
+                          />
+                        );
+                      }
+                    })}
+                  </div>
                 </div>
               </form>
             </div>
             <div className="btns-div">
               <button className="next-btn" onClick={() => handleNextBtnClick()}>
-                Next
+                {step === 4 ? "Create" : "Next"}
               </button>
+              {step > 0 ? (
+                <button
+                  className="back-btn"
+                  onClick={() => handleBackBtnClick()}
+                >
+                  Back
+                </button>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </dialog>

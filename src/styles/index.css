@@ -71,12 +71,26 @@ form {
   align-self: flex-start;
 }
 
-.form-inputs-container {
+.form-inputs-container,
+.form-inputs-container-lvl-two,
+.prf-form-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: max-content;
 
   gap: 0 40px;
+}
+
+.form-inputs-container {
+  grid-template-columns: 1fr;
+}
+
+.form-inputs-container-lvl-two,
+.prf-form-container {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.form-inputs-container > div {
+  text-align: start;
 }
 
 .form-container {
@@ -99,6 +113,7 @@ label {
 
 .form-heading {
   align-self: self-start;
+  margin-bottom: 0;
 }
 
 input {
@@ -112,12 +127,27 @@ input {
   grid-auto-columns: 50% 50%;
 }
 
+.next-btn,
+.back-btn {
+  align-self: center;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+
 .next-btn {
   grid-column: 2;
   justify-self: end;
-  align-self: center;
   margin-right: 50px;
-  background-color: white;
-  border: none;
+}
+
+.back-btn {
+  grid-column: 1;
+  justify-self: start;
+  grid-row: 1;
+  margin-left: 50px;
+}
+
+.add-field-btn {
   cursor: pointer;
 }
