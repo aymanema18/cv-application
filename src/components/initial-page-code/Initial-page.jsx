@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Input from "../Input";
+import Form from "../Form";
 
 const inputsInfo = [
   {
@@ -54,11 +55,11 @@ const inputsInfo = [
 
 export default function InitialPage() {
   const [step, setStep] = useState(0);
-  let keys;
+  // let keys;
 
-  if (step < 5) {
-    keys = Object.keys(inputsInfo[step]);
-  }
+  // if (step < 5) {
+  //   keys = Object.keys(inputsInfo[step]);
+  // }
 
   function handleCreateBtnClick() {
     const dialog = document.querySelector("dialog");
@@ -86,11 +87,6 @@ export default function InitialPage() {
       div.classList = "prf-form-container";
     }
   }
-
-  function handleAddBtnClick(e) {
-    e.preventDefault();
-    return <Input labelText="dsf" type="text" key="dfasafasfsaf" />;
-  }
   // console.log("inside InitialPage");
 
   return (
@@ -116,74 +112,7 @@ export default function InitialPage() {
           <div className="dialog-div">
             <div className="form-container">
               <h1 className="form-heading">{inputsInfo[step]["heading"]}</h1>
-              <form action="">
-                <div className="form-inputs-container">
-                  <div>
-                    {keys.map((key) => {
-                      const div = document.querySelector(
-                        ".form-inputs-container > div"
-                      );
-                      if (
-                        typeof inputsInfo[step][key] === "object" &&
-                        Array.isArray(inputsInfo[step][key]) === false
-                      ) {
-                        div.classList = "";
-                        return (
-                          <>
-                            <div
-                              className="field form-inputs-container-lvl-two"
-                              key={inputsInfo[step][key]["id"]}
-                            >
-                              {Object.keys(inputsInfo[step][key]).map(
-                                (item) => {
-                                  if (
-                                    typeof inputsInfo[step][key][item] ===
-                                      "object" &&
-                                    Array.isArray(
-                                      inputsInfo[step][key][item]
-                                    ) === true
-                                  ) {
-                                    return (
-                                      <Input
-                                        labelText={
-                                          inputsInfo[step][key][item][0]
-                                        }
-                                        type={inputsInfo[step][key][item][1]}
-                                        key={inputsInfo[step][key][item][2]}
-                                      />
-                                    );
-                                  }
-                                }
-                              )}
-                            </div>
-                            <button
-                              className="add-field-btn"
-                              onClick={(e) => {
-                                handleAddBtnClick(e);
-                              }}
-                            >
-                              Add
-                            </button>
-                          </>
-                        );
-                      }
-
-                      if (
-                        typeof inputsInfo[step][key] === "object" &&
-                        Array.isArray(inputsInfo[step][key]) === true
-                      ) {
-                        return (
-                          <Input
-                            labelText={inputsInfo[step][key][0]}
-                            type={inputsInfo[step][key][1]}
-                            key={inputsInfo[step][key][2]}
-                          />
-                        );
-                      }
-                    })}
-                  </div>
-                </div>
-              </form>
+              <Form step={step} inputsInfo={inputsInfo} />
             </div>
             <div className="btns-div">
               <button className="next-btn" onClick={() => handleNextBtnClick()}>

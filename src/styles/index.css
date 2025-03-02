@@ -94,6 +94,7 @@ form {
 }
 
 .form-container {
+  overflow: auto;
   width: 80%;
   padding: 0 45px;
   display: flex;
