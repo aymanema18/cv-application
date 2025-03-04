@@ -5,11 +5,13 @@ import Form from "../Form";
 const inputsInfo = [
   {
     heading: "Profile",
-    labelOne: ["First name:", "text", crypto.randomUUID()],
-    labelTwo: ["Last name:", "text", crypto.randomUUID()],
-    labelThree: ["Address:", "text", crypto.randomUUID()],
-    labelFour: ["Email:", "email", crypto.randomUUID()],
-    labelFive: ["About", "textbox", crypto.randomUUID()],
+    field: {
+      labelOne: ["First name:", "text", crypto.randomUUID()],
+      labelTwo: ["Last name:", "text", crypto.randomUUID()],
+      labelThree: ["Address:", "text", crypto.randomUUID()],
+      labelFour: ["Email:", "email", crypto.randomUUID()],
+      labelFive: ["About:", "textbox", crypto.randomUUID()],
+    },
   },
 
   {
@@ -21,7 +23,7 @@ const inputsInfo = [
       labelThree: ["Location:", "text", crypto.randomUUID()],
       labelFour: ["Start date:", "date", crypto.randomUUID()],
       labelFive: ["End date:", "date", crypto.randomUUID()],
-      stillWorking: false,
+      stillWorking: true,
     },
   },
 
@@ -53,6 +55,66 @@ const inputsInfo = [
   },
 ];
 
+const cvData = [];
+
+function makeKey(name) {
+  name = name.toLowerCase();
+  if (name.split("").includes(" ")) {
+    name = name.split("");
+    name[name.indexOf(" ") + 1] = name[name.indexOf(" ") + 1].toUpperCase();
+    name.splice(name.indexOf(" "), 1);
+    name = name.join("");
+  }
+  return name;
+}
+let i = 0;
+inputsInfo.forEach((item) => {
+  // if (item.heading === "Profile") {
+  //   cvData.push({ heading: "Profile" });
+  //   Object.keys(item).map((key) => {
+  //     if (key === "heading") {
+  //       // do nothing
+  //     } else {
+  //       let temp = makeKey(item[key][0]);
+  //       temp = temp.split("");
+  //       temp.pop();
+  //       temp = temp.join("");
+  //       cvData[i][temp] = "";
+  //     }
+  //   });
+  //   i++;
+  // } else {
+  // }
+  cvData.push({ heading: item.heading });
+  Object.keys(item).map((key) => {
+    if (key === "heading") {
+      // do nothing
+    } else {
+      Object.keys(item[key]).map((keyTwo) => {
+        if (Array.isArray(item[key][keyTwo])) {
+          let temp = makeKey(item[key][keyTwo][0]);
+          temp = temp.split("");
+          temp.pop();
+          temp = temp.join("");
+          cvData[i][key] = { ...cvData[i][key] };
+          cvData[i][key][temp] = "";
+        }
+      });
+    }
+  });
+  i++;
+});
+
+// const cvData = [
+//   {
+//     heading: "Profile",
+//   },
+//   { heading: "Experience", field1: {} },
+//   { heading: "Education", field1: {} },
+//   { heading: "Skills", field1: {} },
+//   { heading: "Additional", field1: {} },
+// ];
+
 export default function InitialPage() {
   const [step, setStep] = useState(0);
   // let keys;
@@ -63,13 +125,31 @@ export default function InitialPage() {
 
   function handleCreateBtnClick() {
     const dialog = document.querySelector("dialog");
-    const div = document.querySelector(".form-inputs-container > div");
-    div.classList = "prf-form-container";
+    // const div = document.querySelector(".form-inputs-container > div");
+    // div.classList = "prf-form-container";
 
     dialog.showModal();
   }
 
   function handleNextBtnClick() {
+    // if (step === 3) {
+    //   const div = document.querySelector(".form-inputs-container-lvl-two");
+
+    //   div.classList = "additional-form-container";
+    // } else {
+    //   const div = document.querySelector(".additional-form-container");
+    //   if (div !== null) div.classList = "form-inputs-container-lvl-two";
+    // }
+
+    // if (step === 2) {
+    //   const div = document.querySelector(".form-inputs-container-lvl-two");
+
+    //   div.classList = "skill-form-container";
+    // } else {
+    //   const div = document.querySelector(".skill-form-container");
+    //   if (div !== null) div.classList = "form-inputs-container-lvl-two";
+    // }
+
     if (step < 4) {
       setStep(step + 1);
     }
@@ -83,8 +163,8 @@ export default function InitialPage() {
   function handleBackBtnClick() {
     setStep(step - 1);
     if (step === 1) {
-      const div = document.querySelector(".form-inputs-container > div");
-      div.classList = "prf-form-container";
+      // const div = document.querySelector(".form-inputs-container > div");
+      // div.classList = "prf-form-container";
     }
   }
   // console.log("inside InitialPage");
@@ -112,7 +192,7 @@ export default function InitialPage() {
           <div className="dialog-div">
             <div className="form-container">
               <h1 className="form-heading">{inputsInfo[step]["heading"]}</h1>
-              <Form step={step} inputsInfo={inputsInfo} />
+              <Form step={step} inputsInfo={inputsInfo} cvData={cvData} />
             </div>
             <div className="btns-div">
               <button className="next-btn" onClick={() => handleNextBtnClick()}>

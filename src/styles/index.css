@@ -73,7 +73,9 @@ form {
 
 .form-inputs-container,
 .form-inputs-container-lvl-two,
-.prf-form-container {
+.prf-form-container,
+.additional-form-container,
+.skill-form-container {
   display: grid;
   grid-auto-rows: max-content;
 
@@ -84,9 +86,16 @@ form {
   grid-template-columns: 1fr;
 }
 
-.form-inputs-container-lvl-two,
-.prf-form-container {
+.form-inputs-container-lvl-two {
   grid-template-columns: repeat(3, 1fr);
+}
+
+.additional-form-container {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.skill-form-container {
+  grid-template-columns: 1fr;
 }
 
 .form-inputs-container > div {
@@ -151,4 +160,5 @@ input {
 
 .add-field-btn {
   cursor: pointer;
+  justify-self: self-start;
 }
